@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="wikiApp">
+    <head>
+        <meta charset="utf-8">
+        <title>TwitchTV</title>
+        <script src="https://code.angularjs.org/1.5.8/angular.min.js"></script>
+        <!--<script src="https://code.angularjs.org/1.5.8/angular-messages.min.js"></script>-->
+        <!--<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-animate.min.js"></script>-->
+        
+        <script src="app.js"></script>
+        <script src="factories/wiki-factory.js"></script>
+        <script src="controllers/wiki-controller.js"></script>
+
+        <!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">-->
+        
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Wikipedia Viewer</h1> 
+        </header>
+
+        <div class="wrapper">
+            <div ng-controller="WikiController as wiki">
+
+            </div> <!-- end of div.WikiController -->
+        </div> <!-- end of div.wrapper -->
+    </body>
+</html>

@@ -1,21 +1,23 @@
 angular.module('wikiApp')
     .controller('WikiController', ['$scope', '$log', '$window', 'WikiFactory', function($scope, $log, $window, wikiFactory) {
 
+        // retrive avaliable languages immediately
+        $scope.langs = wikiFactory.getLanguages();
+        // #keyword input value
         $scope.searchForm = {
-            keyword: ''
+            keyword: '',
+            language: 'en' // english is by default
         };
         // array of retrieved articles after form submit
         $scope.wikiArticles = [];
         $scope.articlesLoading = false;
         $scope.autocompleteIsShown = false;
-        // use it to hide autocomlete propositions field when clicked outside
-        $scope.$window = $window;
 
         // search an entire article
         $scope.searchWikiArticles = function() {
             $scope.autocompleteIsShown = false;
             $scope.articlesLoading = true;
-            wikiFactory.getWikipediaArticles($scope.searchForm.keyword)
+            wikiFactory.getWikipediaArticles($scope.searchForm.language, $scope.searchForm.keyword)
                 .then(function(data) {
                     $scope.wikiArticles = data.data.query.pages;
                     $scope.articlesLoading = false;
@@ -27,7 +29,7 @@ angular.module('wikiApp')
             // filtering input: if input.length is bigger then 3 and only after 1.5 seconds
             if(keyword.length >= 3) {
                 setTimeout(function() {
-                    wikiFactory.getWikipediaTitles(keyword)
+                    wikiFactory.getWikipediaTitles($scope.searchForm.language, keyword)
                         .then(function(data) {
                             // $log.log(data)
                             $scope.wikiTitles = data.data.query.pages;

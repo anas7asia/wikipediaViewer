@@ -28,10 +28,28 @@
 
                 <!-- SEARCH FORM -->
                 <form class="search-form" name="form" ng-submit="searchWikiArticles()">
-                    <label for="keyword">What are you looking for</label>
 
-                    <div class="form-group">
-                        <div class="input-group">
+                    <!-- languages -->
+                    <div class="lang-container">
+                        <span ng-repeat="lang in langs">    
+                                <!--ng-class = "{'lang-label__active' : searchForm.language }"-->
+                            <input 
+                                type="radio" 
+                                id="lang-{{ lang.shortcut }}" 
+                                name="language" 
+                                ng-model="searchForm.language" 
+                                value="{{ lang.shortcut }}">
+                            <label 
+                                for="lang-{{ lang.shortcut }}"
+                                class="lang-label"
+                                >        
+                                {{ lang.full }}
+                            </label>
+                        </span>
+                    </div>
+
+                    <div class="search-group">
+                        <div class="search-input-group">
                             <input 
                                 type="text" 
                                 id="keyword" 
@@ -39,7 +57,7 @@
                                 ng-change="searchTitles(searchForm.keyword)"
                                 placeholder="What are you looking for?">
 
-                            <!-- AUTOCOMPLETE -->
+                            <!-- autocomplete -->
                             <ul id="autocomplete-results" ng-show="autocompleteIsShown">
                                 <li ng-repeat="art in wikiTitles" ng-click="showAutocompleteTitles(art.title)">
                                 <span>{{ art.title | json }}</span>

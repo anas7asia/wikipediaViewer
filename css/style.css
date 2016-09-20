@@ -26,38 +26,57 @@ h1 {
 main {
     flex-grow: 1;
     margin: 0 auto;
-    width: 80%;
+    width: 92%;
     min-height: 80vh;
 }
 
+@media screen and (min-width: 600px) {
+    width: 80%;
+}
+
 .search-form {
-    /*margin: 0 auto;*/
-    margin-top: 2em;
+    margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
 
-label {
-    /*display: none;*/
-    padding-left: .5em;
-    font-weight: bolder;
+.lang-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
 }
 
+.lang-container input[type=radio] {
+    display: none;
+}
 
-.form-group {
+.lang-label {
+    margin-right: .5em;
+    color: gray;
+    font-size: .9em;
+    text-transform: uppercase;
+}
+
+/* class for label of checked radio button */
+input[id^="lang-"]:checked ~ label {
+    color: #000;
+    border-bottom: 1px dotted black;
+}
+
+.search-group {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
 }
 
-.input-group {
+.search-input-group {
     flex-grow: 1;
     position: relative;
 }
 
 #keyword {
-    /*margin-top: 0.4em;*/
-    /*margin-bottom: 1em;*/
     width: 100%;
     padding: .6em .5em;
     border: 1px solid #f6f6f3;

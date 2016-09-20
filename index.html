@@ -53,7 +53,7 @@
                             <!-- autocomplete -->
                             <ul id="autocomplete-results" ng-show="autocompleteIsShown">
                                 <li ng-repeat="art in wikiTitles" ng-click="showAutocompleteTitles(art.title)">
-                                <span>{{ art.title | json }}</span>
+                                <span>{{ art.title }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -68,10 +68,10 @@
                     <div class="wiki-article" ng-repeat="article in wikiArticles">
                         <a href="https://en.wikipedia.org/wiki?curid={{ article.pageid }}" target="_blank">
                             <div class="wiki-article-content">
-                                <h3 class="article-title">{{ article.title | json }}</h3>
+                                <h3 class="article-title">{{ article.title }}</h3>
 
                                 <p class="article-desc">
-                                    {{ article.extract | json }}
+                                    {{ article.extract }}
                                 </p>
                             </div>
                         </a>

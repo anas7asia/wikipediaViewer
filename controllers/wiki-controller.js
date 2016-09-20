@@ -19,7 +19,7 @@ angular.module('wikiApp')
             $scope.articlesLoading = true;
             wikiFactory.getWikipediaArticles($scope.searchForm.language, $scope.searchForm.keyword)
                 .then(function(data) {
-                    $scope.wikiArticles = data.data.query.pages;
+                    $scope.wikiArticles = makePrettyJson(data.data.query.pages);
                     $scope.articlesLoading = false;
                 });
         }
@@ -31,8 +31,7 @@ angular.module('wikiApp')
                 setTimeout(function() {
                     wikiFactory.getWikipediaTitles($scope.searchForm.language, keyword)
                         .then(function(data) {
-                            // $log.log(data)
-                            $scope.wikiTitles = data.data.query.pages;
+                            $scope.wikiTitles = makePrettyJson(data.data.query.pages);
                             $scope.autocompleteIsShown = true;
                         });
                 }, 1500);
@@ -43,6 +42,15 @@ angular.module('wikiApp')
         $scope.showAutocompleteTitles = function(word) {
             $scope.searchForm.keyword = word;
             $scope.autocompleteIsShown = false;
+        }
+
+        function makePrettyJson(json) {
+            var result = [];
+            var keys = Object.keys(json);
+            keys.forEach(function(key){
+                result.push(json[key]);
+            });
+            return result;
         }
      
     }]);

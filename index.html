@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>WikipediaViewer</title>
         <script src="https://code.angularjs.org/1.5.8/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.compat.min.js"></script>
         <!--<script src="https://code.angularjs.org/1.5.8/angular-messages.min.js"></script>-->
         <!--<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>-->
         <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-animate.min.js"></script>-->
@@ -22,10 +23,11 @@
             <h1>Wikipedia Viewer</h1> 
         </header>
 
-        <div class="wrapper">
+        <main>
             <div ng-controller="WikiController as wiki">
 
-                <form class="search-form" ng-submit="searchWikiArticles(keyword)">
+                <!-- SEARCH FORM -->
+                <form class="search-form" name="form" ng-submit="searchWikiArticles()">
                     <label for="keyword">What are you looking for</label>
 
                     <div class="form-group">
@@ -33,23 +35,27 @@
                             <input 
                                 type="text" 
                                 id="keyword" 
-                                ng-model="keyword" 
+                                ng-model="searchForm.keyword" 
+                                ng-change="searchTitles(searchForm.keyword)"
                                 placeholder="What are you looking for?">
 
-                            <!--<ul id="autocomplete-results" [hidden]="!autocompleteIsShown">
-                                <li ng-repeat="let item of items | keys" (click)="showAutocompleteArticle(item.value.title)">
-                                <span>{{ item.value.title }}</span>
+                            <!-- AUTOCOMPLETE -->
+                            <ul id="autocomplete-results" ng-show="autocompleteIsShown">
+                                <li ng-repeat="art in wikiTitles" ng-click="showAutocompleteTitles(art.title)">
+                                <span>{{ art.title | json }}</span>
                                 </li>
-                            </ul>-->
+                            </ul>
                         </div>
                         <button type="submit" class="form-btn">Search</button>
                         <a href="https://en.wikipedia.org/wiki/Special:Random" class="random-article-link" target="_blank">Random page</a>
                     </div>
                 </form>
 
+                <!-- SHOW FOUND ARTICLES -->
+                <div ng-if="articlesLoading">Loading...</div>
                 <div ng-if="wikiArticles">
                     <div class="wiki-article" ng-repeat="article in wikiArticles">
-                        <a href="{{ article.link }}" target="_blank">
+                        <a href="https://en.wikipedia.org/wiki?curid={{ article.pageid }}" target="_blank">
                             <div class="wiki-article-content">
                                 <h3 class="article-title">{{ article.title | json }}</h3>
 
@@ -62,6 +68,6 @@
                 </div>
 
             </div> <!-- end of div.WikiController -->
-        </div> <!-- end of div.wrapper -->
+        </main> <!-- -->
     </body>
 </html>

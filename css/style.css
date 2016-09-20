@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #e6e7e6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+header {
+    padding: 1em;
+    background-color: #fff;
+    font-family: Georgia; 
+}
+
+h1 {
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+main {
+    flex-grow: 1;
+    margin: 0 auto;
+    width: 80%;
+    min-height: 80vh;
+}
+
+.search-form {
+    /*margin: 0 auto;*/
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+}
+
+label {
+    /*display: none;*/
+    padding-left: .5em;
+    font-weight: bolder;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.input-group {
+    flex-grow: 1;
+    position: relative;
+}
+
+#keyword {
+    /*margin-top: 0.4em;*/
+    /*margin-bottom: 1em;*/
+    width: 100%;
+    padding: .6em .5em;
+    border: 1px solid #f6f6f3;
+    border-top-left-radius: .4em;
+    border-bottom-left-radius: .4em;
+    font-size: 1.1em;
+    background-color: #f6f6f3;
+}
+
+.random-article-link,
+.form-btn {
+    display: inline-block;
+    padding: .8em .7em;
+    border: 1px solid transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: #f0f0f0;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.random-article-link {
+    border-top-right-radius: .4em;
+    border-bottom-right-radius: .4em;
+    background-color: #675355;
+}
+
+.form-btn {
+    background-color: #838b83;
+}
+
+#autocomplete-results {
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+}
+
+#autocomplete-results > li {
+    padding: .5em .7em;
+    list-style-type: none;
+    border-top: 1px solid #ECF0F1;
+}
+
+.wiki-article {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: .7em;
+    width: 90%;
+    border: 1px solid #d4d4d8;
+    border-radius: .4em;
+    background-color: #f6f6f3;
+
+}
+
+.wiki-article-img {
+    width: 4em;
+    height: 4em;
+    object-fit: cover;
+}
+
+.wiki-article-content {
+    /*margin-left: .5em;*/
+    color: #000;
+}
+
+.wiki-article a {
+    padding: 1em 1.3em;
+    text-decoration: none;
+}
+
+.article-title {
+    margin-bottom: .15em;
+    color: #675f63;
+}
+
+footer {
+    padding: 2em;
+    text-align: center;
+}

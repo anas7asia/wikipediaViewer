@@ -3,8 +3,12 @@ angular.module('wikiApp')
 
         $scope.wikiArticles = [];
 
-        wikiFactory.getWikipediaArticles()
-            .then(function(data) {
-                $scope.wikiArticles = data;
-            })
+        $scope.searchWikiArticles = function(kword) {
+            $log.log(kword);
+            wikiFactory.getWikipediaArticles(kword)
+                .then(function(data) {
+                    $scope.wikiArticles = data.data.query.pages;
+                    $log.log($scope.wikiArticles);
+                })
+        } 
     }]);

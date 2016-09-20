@@ -2,7 +2,7 @@
 <html lang="en" ng-app="wikiApp">
     <head>
         <meta charset="utf-8">
-        <title>TwitchTV</title>
+        <title>WikipediaViewer</title>
         <script src="https://code.angularjs.org/1.5.8/angular.min.js"></script>
         <!--<script src="https://code.angularjs.org/1.5.8/angular-messages.min.js"></script>-->
         <!--<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>-->
@@ -24,6 +24,42 @@
 
         <div class="wrapper">
             <div ng-controller="WikiController as wiki">
+
+                <form class="search-form" ng-submit="searchWikiArticles(keyword)">
+                    <label for="keyword">What are you looking for</label>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="keyword" 
+                                ng-model="keyword" 
+                                placeholder="What are you looking for?">
+
+                            <!--<ul id="autocomplete-results" [hidden]="!autocompleteIsShown">
+                                <li ng-repeat="let item of items | keys" (click)="showAutocompleteArticle(item.value.title)">
+                                <span>{{ item.value.title }}</span>
+                                </li>
+                            </ul>-->
+                        </div>
+                        <button type="submit" class="form-btn">Search</button>
+                        <a href="https://en.wikipedia.org/wiki/Special:Random" class="random-article-link" target="_blank">Random page</a>
+                    </div>
+                </form>
+
+                <div ng-if="wikiArticles">
+                    <div class="wiki-article" ng-repeat="article in wikiArticles">
+                        <a href="{{ article.link }}" target="_blank">
+                            <div class="wiki-article-content">
+                                <h3 class="article-title">{{ article.title | json }}</h3>
+
+                                <p class="article-desc">
+                                    {{ article.extract | json }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
             </div> <!-- end of div.WikiController -->
         </div> <!-- end of div.wrapper -->

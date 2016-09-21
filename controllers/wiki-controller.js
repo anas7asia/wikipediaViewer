@@ -1,5 +1,5 @@
 angular.module('wikiApp')
-    .controller('WikiController', ['$scope', '$log', '$window', 'WikiFactory', function($scope, $log, $window, wikiFactory) {
+    .controller('WikiController', ['$scope', '$log', 'WikiFactory', function($scope, $log, wikiFactory) {
 
         // retrive avaliable languages immediately
         $scope.langs = wikiFactory.getLanguages();
@@ -11,11 +11,11 @@ angular.module('wikiApp')
         // array of retrieved articles after form submit
         $scope.wikiArticles = [];
         $scope.articlesLoading = false;
-        $scope.autocompleteIsShown = false;
+        $scope.isAutocompleteVisible = false;
 
         // search an entire article
         $scope.searchWikiArticles = function() {
-            $scope.autocompleteIsShown = false;
+            $scope.isAutocompleteVisible = false;
             $scope.articlesLoading = true;
             wikiFactory.getWikipediaArticles($scope.searchForm.language, $scope.searchForm.keyword)
                 .then(function(data) {
@@ -31,19 +31,22 @@ angular.module('wikiApp')
                 setTimeout(function() {
                     wikiFactory.getWikipediaTitles($scope.searchForm.language, keyword)
                         .then(function(data) {
-                            $scope.wikiTitles = makePrettyJson(data.data.query.pages);
-                            $scope.autocompleteIsShown = true;
+                            $log.log(data);
+                            if(data.data.query) {
+                                $scope.wikiTitles = makePrettyJson(data.data.query.pages);
+                                $scope.isAutocompleteVisible = true;
+                            }
                         });
                 }, 1500);
             }
         }
 
         // use autocomplete proposition as #keyword input value
-        $scope.showAutocompleteTitles = function(word) {
-            $scope.searchForm.keyword = word;
-            $scope.autocompleteIsShown = false;
+        $scope.showAutocompleteTitles = function(keyword) {
+            $scope.searchForm.keyword = keyword;
         }
 
+        // transform pure JSON to array of objects
         function makePrettyJson(json) {
             var result = [];
             var keys = Object.keys(json);
@@ -52,5 +55,4 @@ angular.module('wikiApp')
             });
             return result;
         }
-     
     }]);

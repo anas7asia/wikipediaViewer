@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <title>WikipediaViewer</title>
         <script src="https://code.angularjs.org/1.5.8/angular.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.compat.min.js"></script>
         <script src="app.js"></script>
         <script src="factories/wiki-factory.js"></script>
+        <script src="directives/autocomplete-directive.js"></script>
         <script src="controllers/wiki-controller.js"></script>
         <link rel="stylesheet" href="css/style.css">
     </head>
@@ -50,12 +50,12 @@
                                 ng-change="searchTitles(searchForm.keyword)"
                                 placeholder="What are you looking for?">
 
-                            <!-- autocomplete -->
-                            <ul id="autocomplete-results" ng-show="autocompleteIsShown">
-                                <li ng-repeat="art in wikiTitles" ng-click="showAutocompleteTitles(art.title)">
-                                <span>{{ art.title }}</span>
-                                </li>
-                            </ul>
+                            <!-- autocomplete directive -->
+                                <autocomplete 
+                                    titles="wikiTitles" 
+                                    is-visible="isAutocompleteVisible"
+                                    choose-title="showAutocompleteTitles(keyword)"></autocomplete>
+                                
                         </div>
                         <button type="submit" class="btn form-btn">Search</button>
                         <a href="https://en.wikipedia.org/wiki/Special:Random" class="btn random-article-link" target="_blank">Random page</a>
@@ -64,19 +64,22 @@
 
                 <!-- SHOW FOUND ARTICLES -->
                 <div ng-if="articlesLoading">Loading...</div>
-                <div ng-if="wikiArticles">
-                    <div class="wiki-article" ng-repeat="article in wikiArticles">
-                        <a href="https://en.wikipedia.org/wiki?curid={{ article.pageid }}" target="_blank">
-                            <div class="wiki-article-content">
-                                <h3 class="article-title">{{ article.title }}</h3>
+                <div ng-if="!articlesLoading">
+                    <div ng-if="wikiArticles">
+                        <div class="wiki-article" ng-repeat="article in wikiArticles">
+                            <a href="https://en.wikipedia.org/wiki?curid={{ article.pageid }}" target="_blank">
+                                <div class="wiki-article-content">
+                                    <h3 class="article-title">{{ article.title }}</h3>
 
-                                <p class="article-desc">
-                                    {{ article.extract }}
-                                </p>
-                            </div>
-                        </a>
+                                    <p class="article-desc">
+                                        {{ article.extract }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
 
             </div> <!-- end of div.WikiController -->
         </main> <!-- -->

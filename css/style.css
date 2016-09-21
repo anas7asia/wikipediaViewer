@@ -90,6 +90,10 @@ input[id^="lang-"]:checked ~ label {
     font-size: 1.1em;
 }
 
+.search-autocompleted {
+    border-bottom-left-radius: 0;
+}
+
 .btn {
     display: inline-block;
     margin-top: 1em;
@@ -100,14 +104,22 @@ input[id^="lang-"]:checked ~ label {
     color: #f0f0f0;
     text-decoration: none;
     line-height: 1;
+    transition: background 500ms ease;
 }
 
 .random-article-link {
     background-color: #675355;
 }
 
+.random-article-link:hover {
+    background-color: #5e4b4d;
+}
+
 .form-btn {
     background-color: #838b83;
+}
+.form-btn:hover {
+    background-color: #767876;
 }
 
 @media screen and (min-width: 480px) {
@@ -167,7 +179,12 @@ input[id^="lang-"]:checked ~ label {
     border: 1px solid #d4d4d8;
     border-radius: .4em;
     background-color: #f6f6f3;
+    transition: all 500ms ease;
+}
 
+.wiki-article:hover {
+    background-color: #ecece6; 
+    cursor: pointer;
 }
 
 .wiki-article-img {
@@ -177,7 +194,6 @@ input[id^="lang-"]:checked ~ label {
 }
 
 .wiki-article-content {
-    /*margin-left: .5em;*/
     color: #000;
 }
 

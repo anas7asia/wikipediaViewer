@@ -38,7 +38,6 @@ angular.module('wikiApp')
 
                 wikiFactory.getWikipediaTitles($scope.searchForm.language, keyword)
                     .then(function(data) {
-                        $log.log(data);
                         if(data.data.query) {
                             $scope.wikiTitles = makePrettyJson(data.data.query.pages);
                             $scope.isAutocompleteVisible = true;

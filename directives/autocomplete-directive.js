@@ -9,7 +9,7 @@ angular.module('wikiApp')
                 chooseTitle: '&'
             },
             link: function(scope, element, attr){
-                
+
                 // function to tranmit title to $parent scope and make it #keyword input value
                 scope.chooseWikiTitle = function(title) {
                     scope.chooseTitle({keyword: title});
@@ -19,9 +19,8 @@ angular.module('wikiApp')
                     var isClickedElementChildOfPopup = element
                     .find(event.target)
                     .length > 0;
-                    
+
                     if (isClickedElementChildOfPopup) {
-                        console.log('Same element');
                         return;
 
                     }

@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>WikipediaViewer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.angularjs.org/1.5.8/angular.min.js"></script>
         <script src="app.js"></script>
         <script src="factories/wiki-factory.js"></script>
@@ -48,7 +49,7 @@
                                 id="keyword" 
                                 ng-model="searchForm.keyword" 
                                 ng-change="searchTitles(searchForm.keyword)"
-                                ng-model-options="{debounce: 750}"
+                                ng-model-options="{debounce: 300}"
                                 placeholder="What are you looking for?"
                                 required>
 

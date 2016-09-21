@@ -8,14 +8,14 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #e6e7e6;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Georgia; 
     font-size: 16px;
 }
 
 header {
     padding: 1em;
     background-color: #fff;
-    font-family: Georgia; 
+    
 }
 
 h1 {
@@ -84,9 +84,10 @@ input[id^="lang-"]:checked ~ label {
 #keyword {
     padding: .6em .5em;
     width: 100%;
-    border: 1px solid #f6f6f3;
-    font-size: 1.1em;
     background-color: #f6f6f3;
+    border: 1px solid #f6f6f3;
+    font-family: Georgia; 
+    font-size: 1.1em;
 }
 
 .btn {
@@ -94,7 +95,7 @@ input[id^="lang-"]:checked ~ label {
     margin-top: 1em;
     padding: .8em .7em;
     border: 1px solid transparent;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Georgia; 
     font-size: 1rem;
     color: #f0f0f0;
     text-decoration: none;
@@ -109,7 +110,7 @@ input[id^="lang-"]:checked ~ label {
     background-color: #838b83;
 }
 
-@media screen and (min-width: 470px) {
+@media screen and (min-width: 480px) {
     .search-group {
         display: flex;
         flex-direction: row;
@@ -132,6 +133,13 @@ input[id^="lang-"]:checked ~ label {
     }
 }
 
+.autocomplete-loader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
 #autocomplete-results {
     position: absolute;
     width: 100%;
@@ -143,6 +151,11 @@ input[id^="lang-"]:checked ~ label {
     padding: .5em .7em;
     list-style-type: none;
     border-top: 1px solid #ECF0F1;
+}
+
+.articles-loader {
+    display: flex;
+    justify-content: center;
 }
 
 .wiki-article {

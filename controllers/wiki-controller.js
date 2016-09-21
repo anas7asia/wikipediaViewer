@@ -19,25 +19,32 @@ angular.module('wikiApp')
             $scope.articlesLoading = true;
             wikiFactory.getWikipediaArticles($scope.searchForm.language, $scope.searchForm.keyword)
                 .then(function(data) {
-                    $scope.wikiArticles = makePrettyJson(data.data.query.pages);
-                    $scope.articlesLoading = false;
+                    if(data.data.query) {
+                        $scope.wikiArticles = makePrettyJson(data.data.query.pages);
+                        $scope.articlesLoading = false;
+                    }
+                    else {
+                        setTimeout(function() {
+                            $scope.articlesLoading = false;
+                        }, 1000);
+                    }
                 });
         }
 
         // search for article titles to use them in autocomplete
         $scope.searchTitles = function(keyword) {
-            // filtering input: if input.length is bigger then 3 and only after 1.5 seconds
+            // filtering input: if input.length is bigger then 3 and timeout is set as ng-model-options
             if(keyword.length >= 3) {
-                setTimeout(function() {
-                    wikiFactory.getWikipediaTitles($scope.searchForm.language, keyword)
-                        .then(function(data) {
-                            $log.log(data);
-                            if(data.data.query) {
-                                $scope.wikiTitles = makePrettyJson(data.data.query.pages);
-                                $scope.isAutocompleteVisible = true;
-                            }
-                        });
-                }, 1500);
+
+                wikiFactory.getWikipediaTitles($scope.searchForm.language, keyword)
+                    .then(function(data) {
+                        $log.log(data);
+                        if(data.data.query) {
+                            $scope.wikiTitles = makePrettyJson(data.data.query.pages);
+                            $scope.isAutocompleteVisible = true;
+                        }
+                    });
+
             }
         }
 

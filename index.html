@@ -8,6 +8,7 @@
         <script src="factories/wiki-factory.js"></script>
         <script src="directives/autocomplete-directive.js"></script>
         <script src="controllers/wiki-controller.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -25,7 +26,6 @@
                     <!-- languages -->
                     <div class="lang-container">
                         <span ng-repeat="lang in langs">    
-                                <!--ng-class = "{'lang-label__active' : searchForm.language }"-->
                             <input 
                                 type="radio" 
                                 id="lang-{{ lang.shortcut }}" 
@@ -48,7 +48,9 @@
                                 id="keyword" 
                                 ng-model="searchForm.keyword" 
                                 ng-change="searchTitles(searchForm.keyword)"
-                                placeholder="What are you looking for?">
+                                ng-model-options="{debounce: 750}"
+                                placeholder="What are you looking for?"
+                                required>
 
                             <!-- autocomplete directive -->
                                 <autocomplete 
@@ -57,13 +59,16 @@
                                     choose-title="showAutocompleteTitles(keyword)"></autocomplete>
                                 
                         </div>
-                        <button type="submit" class="btn form-btn">Search</button>
+                        <button type="submit" class="btn form-btn" ng-disabled="form.$invalid">Search</button>
                         <a href="https://en.wikipedia.org/wiki/Special:Random" class="btn random-article-link" target="_blank">Random page</a>
                     </div>
                 </form>
 
                 <!-- SHOW FOUND ARTICLES -->
-                <div ng-if="articlesLoading">Loading...</div>
+                <div ng-if="articlesLoading" class="articles-loader">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                </div>
+                <!-- if articles are found-->
                 <div ng-if="!articlesLoading">
                     <div ng-if="wikiArticles">
                         <div class="wiki-article" ng-repeat="article in wikiArticles">
@@ -82,6 +87,9 @@
 
 
             </div> <!-- end of div.WikiController -->
-        </main> <!-- -->
+        </main>
+        <footer>
+            Designed and coded by <a href="https://twitter.com/annikokosheva">Anastasia Oudin</a> 
+        </footer>
     </body>
 </html>
